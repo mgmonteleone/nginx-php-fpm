@@ -2,10 +2,13 @@
 This is a Dockerfile to build a container image for nginx and php-fpm.
 Uses some base configs which are stored in this repo.
 - Automatically pull source from the respective sites
-- The version of nginx and pagespeed are set using env variables, found near the top of the Dockerfile.
+- The version of nginx and pagespeed are set using env variables, found near the top of the Dockerfile. 
+
+Dockerfile settings
 
     ENV NGINX_VERSION 1.9.10
     ENV NPS_VERSION 1.10.33.4
+
 
 ## Base
 ![Ubuntu](http://design.ubuntu.com/wp-content/uploads/ubuntu-logo112.png "Ubuntu")

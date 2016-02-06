@@ -43,8 +43,8 @@ RUN wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz &&tar -xvzf ngi
         wget http://labs.frickle.com/files/ngx_cache_purge-2.3.tar.gz&& \
 	tar -xvzf ngx_cache_purge-2.3.tar.gz && \
 	tar -xvzf 0.54.tar.gz && \
-        cd /opt/nginx-1.9.9/ && \
-        /opt/nginx-1.9.9/configure --prefix=/etc/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log \
+        cd /opt/nginx-${NGINX_VERSION}/ && \
+        /opt/nginx-${NGINX_VERSION}/configure --prefix=/etc/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log \
         --http-client-body-temp-path=/var/lib/nginx/body --http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
         --http-log-path=/var/log/nginx/access.log --http-proxy-temp-path=/var/lib/nginx/proxy \
         --http-scgi-temp-path=/var/lib/nginx/scgi --http-uwsgi-temp-path=/var/lib/nginx/uwsgi \
@@ -57,7 +57,7 @@ RUN wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz &&tar -xvzf ngi
 	--add-module=/opt/ngx_cache_purge-2.3 \
          --sbin-path=/usr/sbin/nginx && \
         make && make install && \
-        rm -f /opt/nginx-1.9.9 -R && \
+        rm -f /opt/nginx-${NGINX_VERSION} -R && \
         rm -f /nginx-${NGINX_VERSION}.tar.gz && \
         rm -f /opt/ngx_cache_purge-2.3.tar.gz && \
         rm -f /opt/0.54.tar.gz

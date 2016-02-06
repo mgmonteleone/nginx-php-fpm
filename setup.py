@@ -177,8 +177,11 @@ def do_config(appname=None):
             env_prefix = arg[1]
     print("-------- Setting up the environment variables using the variable prefix: "+env_prefix+". -------")
     envs_to_configs(prefix=env_prefix)
-    print("-------- Setting the app name to: "+app_name+". --------")
-    rename_section(new_name=app_name)
+    if app_name:
+        print("-------- Setting the app name to: "+app_name+". --------")
+        rename_section(new_name=app_name)
+    else:
+        print("No app name was set, leaving the default app name.")
     # Now we do pagespeed on or off setting
     turnon_pagespeed()
 

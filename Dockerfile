@@ -15,7 +15,6 @@ RUN export LANG=en_US.UTF-8
 ENV NGINX_VERSION 1.9.10
 ENV NPS_VERSION 1.10.33.4
 
-
 # Add sources for latest nginx
 RUN apt-get update && apt-get -y dist-upgrade &&\
  apt-get install -y --force-yes wget software-properties-common \
@@ -152,6 +151,7 @@ RUN chown www-data:www-data /etc/nginx/ -R
 # Expose Ports
 EXPOSE 80
 ENV env_prefix WP_
+ENV app_name default_app
 
 
 CMD ["/bin/bash", "/start.sh"]

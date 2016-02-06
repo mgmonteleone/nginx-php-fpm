@@ -4,7 +4,6 @@ Uses some base configs which are stored in this repo.
 - Automatically pull source from the respective sites
 - The version of nginx and pagespeed are set using env variables, found near the top of the Dockerfile.
 
-    # Set versions for NGINX and Pagespeed
     ENV NGINX_VERSION 1.9.10
     ENV NPS_VERSION 1.10.33.4
 

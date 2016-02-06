@@ -126,10 +126,18 @@ RUN /usr/bin/easy_install supervisor
 RUN /usr/bin/easy_install supervisor-stdout
 ADD ./supervisord.conf /etc/supervisord.conf
 
-# Start Supervisord
+# Add the python setup script do do the env fixes and pagespeed config.
 ADD ./setup.py /setup.py
-ADD ./nginxparser.py /nginxparser.py
 RUN chmod 755 /setup.py
+
+# Pagespeed stuff, disabled by default, need pyparsing to manipulate nginx file
+ENV enable_pagespeed off
+RUN /usr/bin/easy_install pyparsing
+ADD ./nginxparser.py /nginxparser.py
+
+
+
+# Start Supervisord
 ADD ./run.sh /start.sh
 RUN chmod 755 /start.sh
 RUN chown www-data:www-data /data -R
@@ -142,6 +150,6 @@ RUN chown www-data:www-data /etc/nginx/ -R
 # Expose Ports
 EXPOSE 80
 ENV env_prefix WP_
-ENV enable_pagespeed off
-RUN pip install pyparsing
+
+
 CMD ["/bin/bash", "/start.sh"]

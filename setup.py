@@ -175,7 +175,9 @@ def do_config(appname=None):
     for arg in parsedoptlist:
         if arg[0] == "env_prefix":
             env_prefix = arg[1]
+    print("-------- Setting up the environment variables using the variable prefix: "+env_prefix+". -------")
     envs_to_configs(prefix=env_prefix)
+    print("-------- Setting the app name to: "+app_name+". --------")
     rename_section(new_name=app_name)
     # Now we do pagespeed on or off setting
     turnon_pagespeed()

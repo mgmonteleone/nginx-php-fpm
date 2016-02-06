@@ -19,7 +19,8 @@ Container is based on Ubuntu 15.10
 
 - PHP Version: **5.6.11**
 
-Runs last PHP 5.x version from Ubuntu repositories.
+- Runs last PHP 5.x version from Ubuntu repositories.
+- If nothing is mounted to the content directory, a PHP test file will be used as the default root.
 
 
 ## Nginx Versions

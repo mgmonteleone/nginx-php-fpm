@@ -73,7 +73,7 @@ purged.
 Includes the latest Google pagespeed module for dynamic speed up, caching and optimization.
 Has some sane defaults built in (ok, semi sane), which are targeted to Wordpress Installations.
 
-![Pagespeed](https://blog.keycdn.com/blog/wp-content/uploads/2015/09/google-pagespeed-insights.png "Google")
+![Pagespeed](https://camo.githubusercontent.com/4138679c6cf85adb18c4cf820189c898f7dbf5cb/68747470733a2f2f6c68362e676f6f676c6575736572636f6e74656e742e636f6d2f2d71756665644a494a7137592f55584576565978795976492f4141414141414141446f382f4a48444651687339315f632f733430312f30345f6e67785f7061676573706565642e706e67 "Google")
 
 - Current Pagespeed version : **1.10.33.4**
 

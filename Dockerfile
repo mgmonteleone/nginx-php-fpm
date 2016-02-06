@@ -31,7 +31,7 @@ RUN NPS_VERSION=1.10.33.4 && \
  cd ngx_pagespeed-release-${NPS_VERSION}-beta/ && \
  wget https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz && \
  tar -xzvf ${NPS_VERSION}.tar.gz && \
- rm -f release-${NPS_VERSION}-beta.zip
+ rm -f /opt/release-${NPS_VERSION}-beta.zip
 
 ##NGINX
 RUN cd /opt
@@ -139,5 +139,7 @@ ADD ./nginx/.htpasswd /etc/nginx/.htpasswd
 RUN chown www-data:www-data /etc/nginx/ -R
 # Expose Ports
 EXPOSE 80
-
+ENV env_prefix WP_
+ENV enable_pagespeed off
+RUN pip install pyparsing
 CMD ["/bin/bash", "/start.sh"]

@@ -1,8 +1,10 @@
 import os
-import sys, getopt
-from pprint import pprint
+import sys
 import ConfigParser
-import argparse
+from nginxparser import load, dumps
+
+from pprint import pprint
+
 
 def init_config(filename="/etc/php5/fpm/pool.d/www.conf"):
     Config = ConfigParser.ConfigParser()
@@ -77,22 +79,23 @@ def envs_to_configs(filename="/etc/php5/fpm/pool.d/www.conf", sectionname="www",
     for variable in variable_list:
         thename = "env[{0}]".format(variable.get("key"))
         thevalue = variable.get("val")
-        output = "env[{0}] = {1}".format(thename,thevalue)
+        output = "env[{0}] = {1}".format(thename, thevalue)
         print(output)
-        write_to_conf(theconfig,sectionname=sectionname,option=thename,value=thevalue)
+        write_to_conf(theconfig, sectionname=sectionname, option=thename, value=thevalue)
 
     with open(filename, 'wb') as configfile:
         theconfig.write(configfile)
 
 
-def write_to_conf(configObj,sectionname="www",option=None,value=None):
+def write_to_conf(configObj, sectionname="www", option=None, value=None):
     Config = configObj
     try:
-        Config.set(section=sectionname,option=option,value=value)
+        Config.set(section=sectionname, option=option, value=value)
     except ConfigParser.NoSectionError as e:
         Config.add_section(sectionname)
 
-def get_vars(varname=None,prefix=None):
+
+def get_vars(varname=None, prefix=None):
     """
     Retrieves all environment variables on the system and returns them as a list of dictionaries.
 
@@ -110,11 +113,34 @@ def get_vars(varname=None,prefix=None):
         if prefix in variable:
             value = os.environ.get(variable)
             envvar = dict(
-                    key=variable,
-                    val=value
+                key=variable,
+                val=value
             )
             envarlist.append(envvar)
     return envarlist
+
+
+def turnon_pagespeed():
+    found_setting = get_vars(varname="enable_pagespeed")
+    if found_setting and found_setting in ("on","off"):
+        print("Found environment setting for pagespeed, requested to set pagespeed " + found_setting+ "!")
+        ps_config = load(open("/etc/nginx/conf.d/pagespeed.conf"))
+        #print(ps_config.index(["pagespeed", "off"]))
+        for idx, setting in enumerate(ps_config):
+            if len(setting[1].split(" ")) == 1 and setting[1] in ("on","off"):
+             current_setting = setting[1]
+             print("Found the on/off setting at index "+ str(idx))
+             print("Currently pagespeed is set to "+ current_setting+".")
+             del ps_config[idx]
+             ps_config.insert(0,["pagespeed", found_setting])
+        outfile = open("nginx/conf.d/pagespeed.conf","w")
+        outfile.write(dumps(ps_config))
+        outfile.close()
+
+    else:
+        print("No environment variable found, pagespeed will remain disabled.")
+
+
 
 def do_config(appname=None):
     """
@@ -139,7 +165,7 @@ def do_config(appname=None):
             full = arg.split("--")[1].split("=")
             option = full[0]
             thevalue = full[1]
-            parsedopt = (option,thevalue)
+            parsedopt = (option, thevalue)
             if option in ("env_prefix"):
                 parsedoptlist.append(parsedopt)
     if len(parsedoptlist) != 1:
@@ -150,6 +176,8 @@ def do_config(appname=None):
             env_prefix = arg[1]
     envs_to_configs(prefix=env_prefix)
     rename_section(new_name=app_name)
+    # Now we do pagespeed on or off setting
+    turnon_pagespeed()
 
 if __name__ == "__main__":
     do_config()

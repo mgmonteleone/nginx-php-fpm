@@ -15,6 +15,14 @@ Has some sane defaults built in (ok, semi sane), which are targeted to Wordpress
 
 ![Pagespeed](https://blog.keycdn.com/blog/wp-content/uploads/2015/09/google-pagespeed-insights.png "Google")
 
+Pagespeed is disabled by default, and is turned on by setting an environment variable `enable_pagespeed` to "on".
+
+like this:
+   
+    docker run ...
+    -e enable_pagespeed on
+    ...
+
 
 [Nginx Pagespeed Documentation](https://developers.google.com/speed/pagespeed/module/configuration)
 

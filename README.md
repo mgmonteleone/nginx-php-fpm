@@ -91,3 +91,9 @@ like this:
 ## Nginx Cache purge
 Includes on demand php-fpm cache purging from [Frickle Labs](http://labs.frickle.com/nginx_ngx_cache_purge/)
 
+
+# TODOS
+
+- Enable setting all pagespeed options from ENV variables.
+- Check the fastcgi cache purge to make sure it is working correctly.
+- Documentation, documentation.

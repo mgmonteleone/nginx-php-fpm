@@ -123,19 +123,20 @@ def get_vars(varname=None, prefix=None):
 def turnon_pagespeed():
     found_setting = get_vars(varname="enable_pagespeed")
     if found_setting and found_setting in ("on","off"):
-        print("Found environment setting for pagespeed, requested to set pagespeed " + found_setting+ "!")
+        print("--------Found environment setting for pagespeed, requested to set pagespeed " + found_setting+ "! --------")
         ps_config = load(open("/etc/nginx/conf.d/pagespeed.conf"))
         #print(ps_config.index(["pagespeed", "off"]))
         for idx, setting in enumerate(ps_config):
             if len(setting[1].split(" ")) == 1 and setting[1] in ("on","off"):
              current_setting = setting[1]
-             print("Found the on/off setting at index "+ str(idx))
-             print("Currently pagespeed is set to "+ current_setting+".")
+             print("--------Found the on/off setting at index "+ str(idx)+" --------")
+             print("--------Currently pagespeed is set to "+ current_setting+". ---------")
              del ps_config[idx]
              ps_config.insert(0,["pagespeed", found_setting])
         outfile = open("/etc/nginx/conf.d/pagespeed.conf","w")
         outfile.write(dumps(ps_config))
         outfile.close()
+        print("-------Pagespeed is now set to "+found_setting+"-------")
 
     else:
         print("No environment variable found, pagespeed will remain disabled.")

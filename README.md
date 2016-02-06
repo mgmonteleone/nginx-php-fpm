@@ -1,5 +1,18 @@
 ## Introduction
 This is a Dockerfile to build a container image for nginx and php-fpm.
+
+The goal is to create an easily managed, super high performance web application server container for PHP based applications.
+Do do so we:
+
+ - Use lastest NGINX from source
+ - Limit the compiled in modules.
+ - Integrate PHP-FPM with latest 5.X branch PHP.
+ - Enable fast-cgi caching.
+ - Enable fast-cgi cache purging.
+ - Integrate nginx-pagespeed module from Google.
+ - Allow runtime configuration of pagespeed using environment variables.
+ - Enable and protect pagespeed managment endpoints, using simple basic auth.
+
 Uses some base configs which are stored in this repo.
 - Automatically pull source from the respective sites
 - The version of nginx and pagespeed are set using env variables, found near the top of the Dockerfile. 

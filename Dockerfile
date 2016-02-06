@@ -31,7 +31,7 @@ RUN NPS_VERSION=1.10.33.4 && \
  cd ngx_pagespeed-release-${NPS_VERSION}-beta/ && \
  wget https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz && \
  tar -xzvf ${NPS_VERSION}.tar.gz && \
- rm -f ${NPS_VERSION}.tar.gz
+ rm -f release-${NPS_VERSION}-beta.zip
 
 ##NGINX
 RUN cd /opt
@@ -58,9 +58,12 @@ RUN wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz &&tar -xvzf ngi
          --sbin-path=/usr/sbin/nginx && \
         make && make install && \
         rm -f /opt/nginx-${NGINX_VERSION} -R && \
-        rm -f /nginx-${NGINX_VERSION}.tar.gz && \
+        rm -f /opt/nginx-${NGINX_VERSION}.tar.gz && \
         rm -f /opt/ngx_cache_purge-2.3.tar.gz && \
-        rm -f /opt/0.54.tar.gz
+        rm -f /opt/ngx_cache_purge-2.3 -R && \
+        rm -f /opt/0.54.tar.gz && \
+        rm -f /opt/naxsi-0.54 -R && \
+        rm -f /opt/ngx_pagespeed-release-${NPS_VERSION}-beta -R
 
 RUN mkdir /var/lib/nginx && chown www-data:www-data /var/lib/nginx/ -R
 #RUN rm -f /etc/nginx/* -R

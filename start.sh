@@ -24,4 +24,5 @@ docker run -d --name $name \
 -v /logs/$name:/var/log/nginx \
 -p $port:80  \
 -e app_name = $name \
--e "SERVICE_TAGS=wordpress" eu.gcr.io/carbide-ratio-704/$name
+-e enable_pagespeed off \
+ eu.gcr.io/carbide-ratio-704/$name

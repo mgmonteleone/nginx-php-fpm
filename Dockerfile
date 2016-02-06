@@ -17,7 +17,7 @@ ENV NPS_VERSION 1.10.33.4
 
 
 # Add sources for latest nginx
-RUN apt-get update && apt-get -y dist-upgrade && apt-get update &&\
+RUN apt-get update && apt-get -y dist-upgrade &&\
  apt-get install -y --force-yes wget software-properties-common \
  build-essential zlib1g-dev libpcre3 libpcre3-dev unzip wget build-essential zlib1g-dev unzip \
  libssl-dev libxslt1-dev libxml2-dev libgd2-xpm-dev libgeoip-dev  libperl-dev libgoogle-perftools-dev \
@@ -30,7 +30,6 @@ RUN apt-get update && apt-get -y dist-upgrade && apt-get update &&\
 ## PageSpeed
 RUN cd /opt
 WORKDIR /opt
-ENV
 RUN wget https://github.com/pagespeed/ngx_pagespeed/archive/release-${NPS_VERSION}-beta.zip -O release-${NPS_VERSION}-beta.zip && \
  unzip release-${NPS_VERSION}-beta.zip && \
  cd ngx_pagespeed-release-${NPS_VERSION}-beta/ && \

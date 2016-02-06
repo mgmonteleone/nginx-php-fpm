@@ -8,6 +8,17 @@ Uses some base configs which are stored in this repo.
     ENV NGINX_VERSION 1.9.10
     ENV NPS_VERSION 1.10.33.4
 
+## Base
+![Ubuntu](http://design.ubuntu.com/wp-content/uploads/ubuntu-logo112.png "Ubuntu")
+
+Container is based on Ubuntu 15.10
+
+## PHP and PHP-FPM
+
+- PHP Version: **5.6.11**
+
+Runs last PHP 5.x version from Ubuntu repositories.
+
 
 ## Nginx Versions
 ![Nginx](https://assets.wp.nginx.com/wp-content/uploads/2015/04/NGINX_logo_rgb-01.png "Nginx")
@@ -20,7 +31,7 @@ Has some sane defaults built in (ok, semi sane), which are targeted to Wordpress
 
 ![Pagespeed](https://blog.keycdn.com/blog/wp-content/uploads/2015/09/google-pagespeed-insights.png "Google")
 
-- Current Pagespeed versoin : **1.10.33.4**
+- Current Pagespeed version : **1.10.33.4**
 
 Pagespeed is disabled by default, and is turned on by setting an environment variable `enable_pagespeed` to "on".
 

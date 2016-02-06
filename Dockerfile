@@ -128,12 +128,14 @@ ADD ./supervisord.conf /etc/supervisord.conf
 
 # Start Supervisord
 ADD ./setup.py /setup.py
+ADD ./nginxparser.py /nginxparser.py
 RUN chmod 755 /setup.py
 ADD ./run.sh /start.sh
 RUN chmod 755 /start.sh
 RUN chown www-data:www-data /data -R
 RUN mkdir /var/log/pagespeed
 RUN chown www-data:www-data /var/log/pagespeed
+#set up security for pagespeed stuff
 ADD ./nginx/acl.conf /etc/nginx/acl.conf
 ADD ./nginx/.htpasswd /etc/nginx/.htpasswd
 RUN chown www-data:www-data /etc/nginx/ -R

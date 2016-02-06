@@ -11,6 +11,11 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN export LC_ALL=en_US.UTF-8
 RUN export LANG=en_US.UTF-8
 
+# Set versions for NGINX and Pagespeed
+ENV NGINX_VERSION 1.9.10
+ENV NPS_VERSION 1.10.33.4
+
+
 # Add sources for latest nginx
 RUN apt-get update && apt-get -y dist-upgrade && apt-get update &&\
  apt-get install -y --force-yes wget software-properties-common \
@@ -25,8 +30,8 @@ RUN apt-get update && apt-get -y dist-upgrade && apt-get update &&\
 ## PageSpeed
 RUN cd /opt
 WORKDIR /opt
-RUN NPS_VERSION=1.10.33.4 && \
- wget https://github.com/pagespeed/ngx_pagespeed/archive/release-${NPS_VERSION}-beta.zip -O release-${NPS_VERSION}-beta.zip && \
+ENV
+RUN wget https://github.com/pagespeed/ngx_pagespeed/archive/release-${NPS_VERSION}-beta.zip -O release-${NPS_VERSION}-beta.zip && \
  unzip release-${NPS_VERSION}-beta.zip && \
  cd ngx_pagespeed-release-${NPS_VERSION}-beta/ && \
  wget https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz && \
@@ -36,8 +41,7 @@ RUN NPS_VERSION=1.10.33.4 && \
 ##NGINX
 RUN cd /opt
 WORKDIR /opt
-ENV NGINX_VERSION 1.9.10
-ENV NPS_VERSION=1.10.33.4
+
 RUN wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz &&tar -xvzf nginx-${NGINX_VERSION}.tar.gz && cd /opt && \
         wget https://github.com/nbs-system/naxsi/archive/0.54.tar.gz && \
         wget http://labs.frickle.com/files/ngx_cache_purge-2.3.tar.gz&& \
@@ -66,7 +70,6 @@ RUN wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz &&tar -xvzf ngi
         rm -f /opt/ngx_pagespeed-release-${NPS_VERSION}-beta -R
 
 RUN mkdir /var/lib/nginx && chown www-data:www-data /var/lib/nginx/ -R
-#RUN rm -f /etc/nginx/* -R
 VOLUME [ "/data/nginx/cache", "/var/log/nginx"]
 RUN mkdir -p /data/nginx/cache
 RUN mkdir -p /data/ngx_pagespeed_cache

@@ -1,7 +1,12 @@
 ## Introduction
 This is a Dockerfile to build a container image for nginx and php-fpm.
 Uses some base configs which are stored in this repo.
+- Automatically pull source from the respective sites
+- The version of nginx and pagespeed are set using env variables, found near the top of the Dockerfile.
 
+    # Set versions for NGINX and Pagespeed
+    ENV NGINX_VERSION 1.9.10
+    ENV NPS_VERSION 1.10.33.4
 
 
 ## Nginx Versions
@@ -14,6 +19,8 @@ Includes the latest Google pagespeed module for dynamic speed up, caching and op
 Has some sane defaults built in (ok, semi sane), which are targeted to Wordpress Installations.
 
 ![Pagespeed](https://blog.keycdn.com/blog/wp-content/uploads/2015/09/google-pagespeed-insights.png "Google")
+
+- Current Pagespeed versoin : **1.10.33.4**
 
 Pagespeed is disabled by default, and is turned on by setting an environment variable `enable_pagespeed` to "on".
 

@@ -133,7 +133,7 @@ def turnon_pagespeed():
              print("Currently pagespeed is set to "+ current_setting+".")
              del ps_config[idx]
              ps_config.insert(0,["pagespeed", found_setting])
-        outfile = open("nginx/conf.d/pagespeed.conf","w")
+        outfile = open("/etc/nginx/conf.d/pagespeed.conf","w")
         outfile.write(dumps(ps_config))
         outfile.close()
 

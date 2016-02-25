@@ -2,6 +2,9 @@
 This is a Dockerfile to build a container image for nginx and php-fpm.
 
 The goal is to create an easily managed, super high performance web application server container for PHP based applications.
+  - No SSL support, because we always run behind a load-balancer/accellerator (in our case a differant nginx image).
+  - No automated GIT pulls....
+
 Do do so we:
 
  - Use lastest NGINX from source
@@ -45,11 +48,12 @@ Container is based on Ubuntu 15.10
 ### NGINX and fastcgi caching
 
 The included nginx-site.conf file is copied to the container as running site config and has customiztions for 
-PHP caching.
+PHP caching. This is initially a config optimized for wordpress, but can be used for others.
 
 - Does not cache posts.
 - Does not cache a variety of special locations and files for Wordpress.
-
+- Rewrite to allow use of Yoast xml sitemaps.
+- 
 What we dont cache....
 
     # Don't cache uris containing the following segments

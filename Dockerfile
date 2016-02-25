@@ -12,8 +12,8 @@ RUN export LC_ALL=en_US.UTF-8
 RUN export LANG=en_US.UTF-8
 
 # Set versions for NGINX and Pagespeed
-ENV NGINX_VERSION 1.9.10
-ENV NPS_VERSION 1.10.33.4
+ENV NGINX_VERSION 1.9.12
+ENV NPS_VERSION 1.10.33.5
 
 # Add sources for latest nginx
 RUN apt-get update && apt-get -y dist-upgrade &&\
